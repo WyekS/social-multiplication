@@ -1,12 +1,14 @@
 package microservices.book.multiplication.domain;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+
 /**
-* Identifies the attempt from a {@link User} to solve a
-* {@link Multiplication}.
-*/
+ * Identifies the attempt from a {@link User} to solve a
+ * {@link Multiplication}.
+ */
 @RequiredArgsConstructor
 @Getter
 @ToString

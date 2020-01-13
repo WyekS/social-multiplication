@@ -3,6 +3,7 @@ package microservices.book.multiplication.domain;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+
 /**
  * This represents a Multiplication (a * b).
  */

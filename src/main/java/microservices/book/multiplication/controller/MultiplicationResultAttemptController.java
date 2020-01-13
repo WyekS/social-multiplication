@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/results")
 final class MultiplicationResultAttemptController {
-	private final MultiplicationService multiplicationService;
+    private final MultiplicationService multiplicationService;
 
-	@Autowired
-	MultiplicationResultAttemptController(final MultiplicationService multiplicationService) {
-		this.multiplicationService = multiplicationService;
-	}
+    @Autowired
+    MultiplicationResultAttemptController(final MultiplicationService multiplicationService) {
+        this.multiplicationService = multiplicationService;
+    }
 
-	// Here we'll implement our POST later
-	@RequiredArgsConstructor
-	@NoArgsConstructor(force = true)
-	@Getter
-	public static final class ResultResponse {
-		private final boolean correct;
-	}
+    @PostMapping
+    ResponseEntity<ResultResponse> postResult(@RequestBody MultiplicationResultAttempt multiplicationResultAttempt) {
+        return ResponseEntity.ok(new ResultResponse(multiplicationService.checkAttempt(multiplicationResultAttempt)));
+    }
 
-	@PostMapping
-	ResponseEntity<ResultResponse> postResult(@RequestBody MultiplicationResultAttempt multiplicationResultAttempt) {
-		return ResponseEntity.ok(new ResultResponse(multiplicationService.checkAttempt(multiplicationResultAttempt)));
-	}
+    // Here we'll implement our POST later
+    @RequiredArgsConstructor
+    @NoArgsConstructor(force = true)
+    @Getter
+    public static final class ResultResponse {
+        private final boolean correct;
+    }
 }
