@@ -1,9 +1,6 @@
 package microservices.book.gamification.event;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -13,6 +10,7 @@ import java.io.Serializable;
  * information about the multiplication.
  */
 @RequiredArgsConstructor
+@NoArgsConstructor(force = true)
 @Getter
 @ToString
 @EqualsAndHashCode

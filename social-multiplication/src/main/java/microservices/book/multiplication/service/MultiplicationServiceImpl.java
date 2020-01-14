@@ -59,7 +59,6 @@ class MultiplicationServiceImpl implements MultiplicationService {
         eventDispatcher.send(new MultiplicationSolvedEvent(checkedAttempt.getId(), checkedAttempt.getUser().getId(), checkedAttempt.isCorrect()));
         return isCorrect;
     }
-
     @Override
     public List<MultiplicationResultAttempt> getStatsForUser(String userAlias) {
         return attemptRepository.findTop5ByUserAliasOrderByIdDesc(userAlias);
