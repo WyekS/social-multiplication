@@ -1,0 +1,8 @@
+/home/user/practicas/e2e-tests/src/main/java/microservices/book/App.java
+/home/user/practicas/e2e-tests/src/main/java/microservices/book/testutils/beans/Stats.java
+/home/user/practicas/e2e-tests/src/main/java/microservices/book/testutils/beans/AttemptResponse.java
+/home/user/practicas/e2e-tests/src/main/java/microservices/book/testutils/beans/LeaderBoardPosition.java
+/home/user/practicas/e2e-tests/src/main/java/microservices/book/testutils/beans/ScoreResponse.java
+/home/user/practicas/e2e-tests/src/main/java/microservices/book/testutils/beans/User.java
+/home/user/practicas/e2e-tests/src/main/java/microservices/book/testutils/MultiplicationApplication.java
+/home/user/practicas/e2e-tests/src/main/java/microservices/book/testutils/http/ApplicationHttpUtils.java
