@@ -14,8 +14,10 @@ import org.springframework.util.Assert;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 class MultiplicationServiceImpl implements MultiplicationService {
+
     private RandomGeneratorService randomGeneratorService;
     private MultiplicationResultAttemptRepository attemptRepository;
     private UserRepository userRepository;
@@ -41,32 +43,49 @@ class MultiplicationServiceImpl implements MultiplicationService {
 
     @Transactional
     @Override
-    public boolean checkAttempt(final MultiplicationResultAttempt attempt) {
+    public MultiplicationResultAttempt checkAttempt(final MultiplicationResultAttempt attempt) {
         // Check if the user already exists for that alias
         Optional<User> user = userRepository.findByAlias(attempt.getUser().getAlias());
+
         // Avoids 'hack' attempts
         Assert.isTrue(!attempt.isCorrect(), "You can't send an attempt marked as correct!!");
+
         // Check if the attempt is correct
-        boolean isCorrect = attempt.getResultAttempt() == attempt.getMultiplication().getFactorA() * attempt.getMultiplication().getFactorB();
-        MultiplicationResultAttempt checkedAttempt = new MultiplicationResultAttempt(user.orElse(attempt.getUser()),
+        boolean isCorrect = attempt.getResultAttempt() ==
+                attempt.getMultiplication().getFactorA() *
+                        attempt.getMultiplication().getFactorB();
+
+        MultiplicationResultAttempt checkedAttempt = new MultiplicationResultAttempt(
+                user.orElse(attempt.getUser()),
                 attempt.getMultiplication(),
                 attempt.getResultAttempt(),
-                isCorrect);
+                isCorrect
+        );
 
         // Stores the attempt
-        attemptRepository.save(checkedAttempt);
+        MultiplicationResultAttempt storedAttempt = attemptRepository.save(checkedAttempt);
+
         // Communicates the result via Event
-        eventDispatcher.send(new MultiplicationSolvedEvent(checkedAttempt.getId(), checkedAttempt.getUser().getId(), checkedAttempt.isCorrect()));
-        return isCorrect;
+        eventDispatcher.send(
+                new MultiplicationSolvedEvent(checkedAttempt.getId(),
+                        checkedAttempt.getUser().getId(),
+                        checkedAttempt.isCorrect())
+        );
+
+        return storedAttempt;
     }
+
     @Override
-    public List<MultiplicationResultAttempt> getStatsForUser(String userAlias) {
+    public List<MultiplicationResultAttempt> getStatsForUser(final String userAlias) {
         return attemptRepository.findTop5ByUserAliasOrderByIdDesc(userAlias);
     }
 
     @Override
     public MultiplicationResultAttempt getResultById(final Long resultId) {
         Optional<MultiplicationResultAttempt> attemptCopy = attemptRepository.findById(resultId);
+
         return attemptCopy.get();
     }
+
+
 }

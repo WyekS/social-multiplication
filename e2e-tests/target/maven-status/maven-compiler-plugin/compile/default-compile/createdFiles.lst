@@ -1,0 +1,8 @@
+microservices/book/testutils/beans/User.class
+microservices/book/testutils/beans/AttemptResponse.class
+microservices/book/testutils/MultiplicationApplication.class
+microservices/book/testutils/beans/Stats.class
+microservices/book/testutils/http/ApplicationHttpUtils.class
+microservices/book/testutils/beans/LeaderBoardPosition.class
+microservices/book/testutils/beans/ScoreResponse.class
+microservices/book/App.class
